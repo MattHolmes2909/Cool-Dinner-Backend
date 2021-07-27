@@ -90,3 +90,5 @@ exports.delete = async (req, res) => {
 
   db.close();
 };
+
+// 'SELECT COUNT(*) FROM child WHERE foodOption = ?', [foodOption];
