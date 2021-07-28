@@ -4,20 +4,17 @@ const path = require('path');
 
 const args = process.argv.slice(2)[0];
 
+const { CLEARDB_DATABASE_URL } = process.env;
+// use args to determine if .env or .env.test should be loaded
 const envFile = args === 'test' ? '../.env.test' : '../.env';
 
-require('dotenv').config({
-  path: path.join(__dirname, envFile),
-});
+// load environment variables from env files
+!CLEARDB_DATABASE_URL &&
+  require('dotenv').config({
+    path: path.join(__dirname, envFile),
+  });
 
-const {
-  DB_PASSWORD,
-  DB_NAME,
-  DB_USER,
-  DB_HOST,
-  DB_PORT,
-  CLEARDB_DATABASE_URL,
-} = process.env;
+const { DB_PASSWORD, DB_NAME, DB_USER, DB_HOST, DB_PORT } = process.env;
 
 const setUpDatabase = async () => {
   try {
