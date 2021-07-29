@@ -46,6 +46,23 @@ exports.readById = async (req, res) => {
   db.close();
 };
 
+exports.readByClass = async (req, res) => {
+  const db = await getDb();
+  const { schoolClass } = req.params;
+
+  try {
+    const [children] = await db.query(
+      'SELECT * FROM child WHERE schoolClass=?',
+      [schoolClass]
+    );
+
+    res.status(200).json(children);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+  db.close();
+};
+
 exports.update = async (req, res) => {
   const db = await getDb();
   const { childId } = req.params;

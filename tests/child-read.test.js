@@ -20,7 +20,7 @@ describe('read children', () => {
       ),
       db.query(
         'INSERT INTO child (childName, schoolClass, foodOption) VALUES(?, ?, ?)',
-        ['Alex White', '1DS', 'fish']
+        ['Alex White', '1MH', 'fish']
       ),
     ]);
 
@@ -48,6 +48,7 @@ describe('read children', () => {
       });
     });
   });
+
   describe('/child/:childId', () => {
     describe('GET', () => {
       it('returns a single child with the correct id', async () => {
@@ -62,6 +63,19 @@ describe('read children', () => {
         const res = await request(app).get('/child/999999').send();
 
         expect(res.status).to.equal(404);
+      });
+    });
+  });
+
+  describe('/child/:schoolClass', () => {
+    describe('GET', () => {
+      it('returns all children from a particular class', async () => {
+        const res = await request(app).get(`/child/class/1DS`).send();
+
+        expect(res.status).to.equal(200);
+        expect(res.body.length).to.equal(2);
+        expect(res.body[0].childName).to.equal('Dean Spooner');
+        expect(res.body[1].childName).to.equal('Matt Holmes');
       });
     });
   });
