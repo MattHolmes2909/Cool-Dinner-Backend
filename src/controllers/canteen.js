@@ -52,3 +52,21 @@ exports.countByFood = async (req, res) => {
 
   db.close();
 };
+
+exports.countByFoodAndClass = async (req, res) => {
+  const db = await getDb();
+  const { foodOption, schoolClass } = req.params;
+
+  const [[foodCount]] = await db.query(
+    'SELECT COUNT(*) FROM child WHERE foodOption = ? AND schoolClass = ?',
+    [foodOption, schoolClass]
+  );
+
+  if (!foodOption || !schoolClass) {
+    res.sendStatus(404);
+  } else {
+    res.status(200).json(foodCount);
+  }
+
+  db.close();
+};

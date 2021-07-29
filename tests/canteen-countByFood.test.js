@@ -21,6 +21,18 @@ describe('counts amount of different food ordered', () => {
         'INSERT INTO child (childName, schoolClass, foodOption) VALUES(?, ?, ?)',
         ['Alex White', '1DS', 'quorn']
       ),
+      db.query(
+        'INSERT INTO child (childName, schoolClass, foodOption) VALUES(?, ?, ?)',
+        ['Nathan Mayall', '1MH', 'fish']
+      ),
+      db.query(
+        'INSERT INTO child (childName, schoolClass, foodOption) VALUES(?, ?, ?)',
+        ['David Buckley', '1MH', 'fish']
+      ),
+      db.query(
+        'INSERT INTO child (childName, schoolClass, foodOption) VALUES(?, ?, ?)',
+        ['Carolina Dias', '1MH', 'none']
+      ),
     ]);
   });
 
@@ -48,6 +60,21 @@ describe('counts amount of different food ordered', () => {
         const res = await request(app).get('/child/999999').send();
 
         expect(res.status).to.equal(404);
+      });
+    });
+
+    describe('GET', () => {
+      it('returns the correct amount of orders for the selected foodOption for a particular class', async () => {
+        const dsPasta = await request(app).get(`/canteen/pasta/1DS`).send();
+        const mhPasta = await request(app).get(`/canteen/pasta/1MH`).send();
+        const mhFish = await request(app).get(`/canteen/fish/1MH`).send();
+
+        expect(dsPasta.status).to.equal(200);
+        expect(dsPasta.body).to.deep.equal({ 'COUNT(*)': 1 });
+        expect(mhPasta.status).to.equal(200);
+        expect(mhPasta.body).to.deep.equal({ 'COUNT(*)': 0 });
+        expect(mhFish.status).to.equal(200);
+        expect(mhFish.body).to.deep.equal({ 'COUNT(*)': 2 });
       });
     });
   });

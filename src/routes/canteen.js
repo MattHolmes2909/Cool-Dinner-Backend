@@ -7,4 +7,6 @@ router.get('/', canteenController.countAllFoods);
 
 router.get('/:foodOption', canteenController.countByFood);
 
+router.get('/:foodOption/:schoolClass', canteenController.countByFoodAndClass);
+
 module.exports = router;
