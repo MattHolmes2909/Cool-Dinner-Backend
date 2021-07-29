@@ -1,5 +1,5 @@
 {
-  "name": "nandos-database",
+  "name": "cool-dinners-backend",
   "version": "1.0.0",
   "description": "Backend database to allow for CRUD operations on children's/classes' dinner orders.",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "prestart": "node utils/create-database.js",
-    "pretest": "node utils/create-database.js test",
+    "pretest": "node utils/create-test-database.js test",
     "posttest": "node utils/drop-database.js",
     "start": "node index.js",
     "start:dev": "nodemon -r dotenv/config index.js",

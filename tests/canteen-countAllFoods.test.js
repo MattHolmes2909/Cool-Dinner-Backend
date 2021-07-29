@@ -36,14 +36,17 @@ describe('counts amount of all foods ordered', () => {
 
         expect(expected.status).to.equal(200);
         expect(expected.body).to.deep.equal({
+          pizza: {
+            'COUNT(*)': 0,
+          },
           pasta: {
             'COUNT(*)': 1,
           },
-          quorn: {
-            'COUNT(*)': 2,
-          },
           fish: {
             'COUNT(*)': 0,
+          },
+          quorn: {
+            'COUNT(*)': 2,
           },
           none: {
             'COUNT(*)': 0,

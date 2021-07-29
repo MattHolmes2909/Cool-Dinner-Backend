@@ -3,14 +3,14 @@ const getDb = require('../services/db');
 exports.countAllFoods = async (_, res) => {
   const db = await getDb();
 
+  const [[pizza]] = await db.query(
+    'SELECT COUNT(*) FROM child WHERE foodOption = ?',
+    ['pizza']
+  );
+
   const [[pasta]] = await db.query(
     'SELECT COUNT(*) FROM child WHERE foodOption = ?',
     ['pasta']
-  );
-
-  const [[quorn]] = await db.query(
-    'SELECT COUNT(*) FROM child WHERE foodOption = ?',
-    ['quorn']
   );
 
   const [[fish]] = await db.query(
@@ -18,12 +18,19 @@ exports.countAllFoods = async (_, res) => {
     ['fish']
   );
 
+  const [[quorn]] = await db.query(
+    'SELECT COUNT(*) FROM child WHERE foodOption = ?',
+    ['quorn']
+  );
+
   const [[none]] = await db.query(
     'SELECT COUNT(*) FROM child WHERE foodOption = ?',
     ['none']
   );
 
-  res.status(200).json({ pasta: pasta, quorn: quorn, fish: fish, none: none });
+  res
+    .status(200)
+    .json({ pizza: pizza, pasta: pasta, fish: fish, quorn: quorn, none: none });
 
   db.close();
 };
