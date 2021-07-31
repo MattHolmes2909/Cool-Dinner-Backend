@@ -27,7 +27,8 @@ const setUpDatabase = async () => {
             id INT PRIMARY KEY auto_increment,
             childName VARCHAR(25),
             schoolClass VARCHAR(25),
-            foodOption VARCHAR(25)
+            foodOption VARCHAR(25),
+            allergies VARCHAR(25)
             )`);
     await db.query(`CREATE TABLE IF NOT EXISTS canteen (
             foodOption VARCHAR(25) PRIMARY KEY,

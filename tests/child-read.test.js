@@ -11,16 +11,16 @@ describe('read children', () => {
     db = await getDb();
     await Promise.all([
       db.query(
-        'INSERT INTO child (childName, schoolClass, foodOption) VALUES(?, ?, ?)',
-        ['Dean Spooner', '1DS', 'pasta']
+        'INSERT INTO child (childName, schoolClass, foodOption, allergies) VALUES(?, ?, ?, ?)',
+        ['Dean Spooner', '1DS', 'pasta', 'none']
       ),
       db.query(
-        'INSERT INTO child (childName, schoolClass, foodOption) VALUES(?, ?, ?)',
-        ['Matt Holmes', '1DS', 'quorn']
+        'INSERT INTO child (childName, schoolClass, foodOption, allergies) VALUES(?, ?, ?, ?)',
+        ['Matt Holmes', '1DS', 'quorn', 'none']
       ),
       db.query(
-        'INSERT INTO child (childName, schoolClass, foodOption) VALUES(?, ?, ?)',
-        ['Alex White', '1MH', 'fish']
+        'INSERT INTO child (childName, schoolClass, foodOption, allergies) VALUES(?, ?, ?, ?)',
+        ['Alex White', '1MH', 'fish', 'none']
       ),
     ]);
 

@@ -11,15 +11,15 @@ describe('update child', () => {
     await Promise.all([
       db.query(
         'INSERT INTO child (childName, schoolClass, foodOption) VALUES(?, ?, ?)',
-        ['Dean Spooner', '1DS', 'pasta']
+        ['Dean Spooner', '1DS', 'pasta', 'none']
       ),
       db.query(
         'INSERT INTO child (childName, schoolClass, foodOption) VALUES(?, ?, ?)',
-        ['Matt Holmes', '1DS', 'quorn']
+        ['Matt Holmes', '1DS', 'quorn', 'none']
       ),
       db.query(
         'INSERT INTO child (childName, schoolClass, foodOption) VALUES(?, ?, ?)',
-        ['Alex White', '1DS', 'fish']
+        ['Alex White', '1DS', 'fish', 'none']
       ),
     ]);
 

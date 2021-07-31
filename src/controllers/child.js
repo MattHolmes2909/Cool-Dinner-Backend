@@ -2,16 +2,17 @@ const getDb = require('../services/db');
 
 exports.create = async (req, res) => {
   const db = await getDb();
-  const { childName, schoolClass, foodOption } = req.body;
+  const { childName, schoolClass, foodOption, allergies } = req.body;
 
   try {
     await db.query(
-      'INSERT INTO child (childName, schoolClass, foodOption) VALUES (?, ?, ?)',
-      [childName, schoolClass, foodOption]
+      'INSERT INTO child (childName, schoolClass, foodOption, allergies) VALUES (?, ?, ?, ?)',
+      [childName, schoolClass, foodOption, allergies]
     );
     res.sendStatus(201);
   } catch (err) {
     res.sendStatus(500).json(err);
+    console.log(err);
   }
   db.close();
 };
@@ -107,5 +108,3 @@ exports.delete = async (req, res) => {
 
   db.close();
 };
-
-// 'SELECT COUNT(*) FROM child WHERE foodOption = ?', [foodOption];
