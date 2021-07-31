@@ -4,27 +4,27 @@ exports.countAllFoods = async (_, res) => {
   const db = await getDb();
 
   const [[pizza]] = await db.query(
-    'SELECT COUNT(*) FROM child WHERE foodOption = ?',
+    'SELECT COUNT(*) as totalPizza FROM child WHERE foodOption = ?',
     ['pizza']
   );
 
   const [[pasta]] = await db.query(
-    'SELECT COUNT(*) FROM child WHERE foodOption = ?',
+    'SELECT COUNT(*) as totalPasta FROM child WHERE foodOption = ?',
     ['pasta']
   );
 
   const [[fish]] = await db.query(
-    'SELECT COUNT(*) FROM child WHERE foodOption = ?',
+    'SELECT COUNT(*) as totalFish FROM child WHERE foodOption = ?',
     ['fish']
   );
 
   const [[quorn]] = await db.query(
-    'SELECT COUNT(*) FROM child WHERE foodOption = ?',
+    'SELECT COUNT(*) as totalQuorn FROM child WHERE foodOption = ?',
     ['quorn']
   );
 
   const [[none]] = await db.query(
-    'SELECT COUNT(*) FROM child WHERE foodOption = ?',
+    'SELECT COUNT(*) as totalNone FROM child WHERE foodOption = ?',
     ['none']
   );
 
@@ -40,7 +40,7 @@ exports.countByFood = async (req, res) => {
   const { foodOption } = req.params;
 
   const [[foodCount]] = await db.query(
-    'SELECT COUNT(*) FROM child WHERE foodOption = ?',
+    'SELECT COUNT(*) as total FROM child WHERE foodOption = ?',
     [foodOption]
   );
 
@@ -58,7 +58,7 @@ exports.countByFoodAndClass = async (req, res) => {
   const { foodOption, schoolClass } = req.params;
 
   const [[foodCount]] = await db.query(
-    'SELECT COUNT(*) FROM child WHERE foodOption = ? AND schoolClass = ?',
+    'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
     [foodOption, schoolClass]
   );
 

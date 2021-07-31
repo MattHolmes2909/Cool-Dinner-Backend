@@ -49,11 +49,11 @@ describe('counts amount of different food ordered', () => {
         const nandos = await request(app).get(`/canteen/nandos`).send();
 
         expect(pasta.status).to.equal(200);
-        expect(pasta.body).to.deep.equal({ 'COUNT(*)': 1 });
+        expect(pasta.body).to.deep.equal({ total: 1 });
         expect(quorn.status).to.equal(200);
-        expect(quorn.body).to.deep.equal({ 'COUNT(*)': 2 });
+        expect(quorn.body).to.deep.equal({ total: 2 });
         expect(nandos.status).to.equal(200);
-        expect(nandos.body).to.deep.equal({ 'COUNT(*)': 0 });
+        expect(nandos.body).to.deep.equal({ total: 0 });
       });
 
       it('returns a 404 if the child is not in the database', async () => {
@@ -70,11 +70,11 @@ describe('counts amount of different food ordered', () => {
         const mhFish = await request(app).get(`/canteen/fish/1MH`).send();
 
         expect(dsPasta.status).to.equal(200);
-        expect(dsPasta.body).to.deep.equal({ 'COUNT(*)': 1 });
+        expect(dsPasta.body).to.deep.equal({ total: 1 });
         expect(mhPasta.status).to.equal(200);
-        expect(mhPasta.body).to.deep.equal({ 'COUNT(*)': 0 });
+        expect(mhPasta.body).to.deep.equal({ total: 0 });
         expect(mhFish.status).to.equal(200);
-        expect(mhFish.body).to.deep.equal({ 'COUNT(*)': 2 });
+        expect(mhFish.body).to.deep.equal({ total: 2 });
       });
     });
   });
