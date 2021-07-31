@@ -37,19 +37,39 @@ describe('counts amount of all foods ordered', () => {
         expect(expected.status).to.equal(200);
         expect(expected.body).to.deep.equal({
           pizza: {
-            totalPizza: 0,
+            total: 0,
+            total1DS: 0,
+            total1MH: 0,
+            total2AW: 0,
+            total2NM: 0,
           },
           pasta: {
-            totalPasta: 1,
+            total: 1,
+            total1DS: 1,
+            total1MH: 0,
+            total2AW: 0,
+            total2NM: 0,
           },
           fish: {
-            totalFish: 0,
+            total: 0,
+            total1DS: 0,
+            total1MH: 0,
+            total2AW: 0,
+            total2NM: 0,
           },
           quorn: {
-            totalQuorn: 2,
+            total: 2,
+            total1DS: 2,
+            total1MH: 0,
+            total2AW: 0,
+            total2NM: 0,
           },
           none: {
-            totalNone: 0,
+            total: 0,
+            total1DS: 0,
+            total1MH: 0,
+            total2AW: 0,
+            total2NM: 0,
           },
         });
       });
