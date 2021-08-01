@@ -230,47 +230,35 @@ exports.countByFood = async (req, res) => {
   const db = await getDb();
   const { foodOption } = req.params;
 
-  let food = {
-    name: foodOption,
-    total: 0,
-    total1DS: 0,
-    total1MH: 0,
-    total2AW: 0,
-    total2NM: 0,
-  };
+  const [[foodCount1DS]] = await db.query(
+    'SELECT COUNT(*) as total1DS FROM child WHERE foodOption = ? AND schoolClass=?',
+    [foodOption, '1DS']
+  );
 
-  const [[[total]], [[total1DS]], [[total1MH]], [[total2AW]], [[total2NM]]] = [
-    await db.query('SELECT COUNT(*) as total FROM child WHERE foodOption = ?', [
-      foodOption,
-    ]),
-    await db.query(
-      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
-      [foodOption, '1DS']
-    ),
-    await db.query(
-      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
-      [foodOption, '1MH']
-    ),
-    await db.query(
-      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
-      [foodOption, '2AW']
-    ),
-    await db.query(
-      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
-      [foodOption, '2NM']
-    ),
-  ];
+  const [[foodCount1MH]] = await db.query(
+    'SELECT COUNT(*) as total1MH FROM child WHERE foodOption = ? AND schoolClass=?',
+    [foodOption, '1MH']
+  );
 
-  food.total = total.total;
-  food.total1DS = total1DS.total;
-  food.total1MH = total1MH.total;
-  food.total2AW = total2AW.total;
-  food.total2NM = total2NM.total;
+  const [[foodCount2AW]] = await db.query(
+    'SELECT COUNT(*) as total2AW FROM child WHERE foodOption = ? AND schoolClass=?',
+    [foodOption, '2AW']
+  );
+
+  const [[foodCount2NM]] = await db.query(
+    'SELECT COUNT(*) as total2NM FROM child WHERE foodOption = ? AND schoolClass=?',
+    [foodOption, '2NM']
+  );
 
   if (!foodOption) {
     res.sendStatus(404);
   } else {
-    res.status(200).json(food);
+    res.status(200).json({
+      total1DS: foodCount1DS,
+      total1MH: foodCount1MH,
+      total2AW: foodCount2AW,
+      total2NM: foodCount2NM,
+    });
   }
 
   db.close();
