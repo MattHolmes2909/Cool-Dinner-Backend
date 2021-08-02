@@ -2,12 +2,12 @@ const getDb = require('../services/db');
 
 exports.create = async (req, res) => {
   const db = await getDb();
-  const { username, password, schoolClass, userType } = req.body;
+  const { username, password, userType, schoolClass } = req.body;
 
   try {
     await db.query(
-      'INSERT INTO users (username, password, schoolClass, userType) VALUES (?, ?)',
-      [username, password, schoolClass, userType]
+      'INSERT INTO users (username, password, userType, schoolClass) VALUES (?, ?, ?, ?)',
+      [username, password, userType, schoolClass]
     );
     res.sendStatus(201);
   } catch (err) {
