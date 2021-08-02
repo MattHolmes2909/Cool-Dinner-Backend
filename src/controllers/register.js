@@ -1,6 +1,6 @@
 const getDb = require('../services/db');
 
-exports.register = async (req, res) => {
+exports.create = async (req, res) => {
   const db = await getDb();
   const { username, password } = req.body;
 

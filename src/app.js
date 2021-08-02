@@ -1,6 +1,7 @@
 const express = require('express');
 const childRouter = require('./routes/child');
 const canteenRouter = require('./routes/canteen');
+const registerRouter = require('./routes/register');
 
 const app = express();
 
@@ -16,5 +17,7 @@ app.use((req, res, next) => {
 app.use('/child', childRouter);
 
 app.use('/canteen', canteenRouter);
+
+app.use('/register', registerRouter);
 
 module.exports = app;
