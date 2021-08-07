@@ -38,6 +38,12 @@ const setUpDatabase = async () => {
             classNumberThree INT,
             classNumberFour INT
             )`);
+    await db.query(`CREATE TABLE IF NOT EXISTS users (
+            username VARCHAR(25) PRIMARY KEY,
+            password VARCHAR(25),
+            schoolClass VARCHAR(25),
+            userType VARCHAR(25),
+            )`);
     db.close();
   } catch (err) {
     console.log(
