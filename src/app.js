@@ -9,6 +9,8 @@ const app = express();
 
 app.options('*', cors());
 
+app.use(cors({ origin: true, credentials: true }));
+
 app.use(express.json());
 
 app.use('/child', childRouter);
