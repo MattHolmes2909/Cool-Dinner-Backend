@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 exports.login = async (req, res) => {
   const db = await getDb();
-  const { username, password } = req.body;
+  const { username, password } = await req.body;
 
   try {
     const [row] = await db.query('SELECT * FROM users WHERE username=?', [
