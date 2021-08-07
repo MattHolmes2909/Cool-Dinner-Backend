@@ -9,7 +9,9 @@ const app = express();
 
 app.options('*', cors());
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(
+  cors({ origin: true, credentials: true, methods: 'GET, PUT, POST, DELETE' })
+);
 
 app.use(express.json());
 
