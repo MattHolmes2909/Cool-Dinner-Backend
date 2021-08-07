@@ -1,6 +1,12 @@
 {
   "name": "cool-dinners-backend",
   "version": "1.0.0",
+<<<<<<< HEAD
+=======
+  "engines": {
+    "node": "14.17.3"
+  },
+>>>>>>> refs/remotes/origin/main
   "description": "Backend database to allow for CRUD operations on children's/classes' dinner orders.",
   "main": "index.js",
   "directories": {
@@ -26,10 +32,18 @@
     "supertest": "^6.1.4"
   },
   "dependencies": {
+<<<<<<< HEAD
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5"
+=======
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.3.0"
+>>>>>>> refs/remotes/origin/main
   }
 }
