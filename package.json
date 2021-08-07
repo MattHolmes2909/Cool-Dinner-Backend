@@ -1,0 +1,34 @@
+{
+  "name": "cool-dinners-backend",
+  "version": "1.0.0",
+  "description": "Backend database to allow for CRUD operations on children's/classes' dinner orders.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "prestart": "node utils/create-database.js",
+    "pretest": "node utils/create-test-database.js test",
+    "posttest": "node utils/drop-database.js",
+    "start": "node index.js",
+    "start:dev": "nodemon -r dotenv/config index.js",
+    "test": "mocha tests/**/*.js --exit --recursive --timeout 60000 --file ./tests/test-setup.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "dotenv": "^9.0.2",
+    "eslint": "^7.26.0",
+    "mocha": "^8.4.0",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.4"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.3.0"
+  }
+}
