@@ -1,26 +1,41 @@
 const getDb = require('../services/db');
+const bcrypt = require('bcryptjs');
 
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
   const db = await getDb();
-  const { username, password, userType, schoolClass } = req.body;
 
+  const { username, password, schoolClass, userType } = req.body;
   try {
     const [row] = await db.execute('SELECT * FROM users WHERE username=?', [
       username,
     ]);
 
-    if (row.length > 0) {
-      res.send('Username already exists!').sendStatus(500);
-    } else {
-      await db.query(
-        'INSERT INTO users (username, password, userType, schoolClass) VALUES (?, ?, ?, ?)',
-        [username, password, userType, schoolClass]
-      );
-      res.sendStatus(201);
+    if (row.length >= 1) {
+      res.send('This username already in use.').sendStatus(500);
     }
-  } catch (err) {
-    res.sendStatus(500).json(err);
-    console.log(err);
+
+    if (password.length < 8) {
+      res
+        .send(
+          'This password is too short. It must be at least 8 characters long.'
+        )
+        .sendStatus(500);
+    }
+
+    const hashPass = await bcrypt.hash(password, 12);
+
+    const [rows] = await db.execute(
+      'INSERT INTO users(username, password, schoolClass, userType) VALUES(?, ?, ?, ?)',
+      [username, hashPass, schoolClass, userType]
+    );
+
+    if (rows.affectedRows !== 1) {
+      res.send('Your registration has failed.').sendStatus(500);
+    }
+
+    res.send('You have successfully registered.').sendStatus(201);
+  } catch (error) {
+    next(error);
   }
   db.close();
 };
