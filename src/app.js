@@ -7,12 +7,6 @@ const loginRouter = require('./routes/login');
 
 const app = express();
 
-app.options('*', cors());
-
-app.use(
-  cors({ origin: true, credentials: true, methods: 'GET, PUT, POST, DELETE' })
-);
-
 app.use(express.json());
 
 app.use('/child', childRouter);
