@@ -1,6 +1,9 @@
 {
   "name": "cool-dinners-backend",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.17.3"
+  },
   "description": "Backend database to allow for CRUD operations on children's/classes' dinner orders.",
   "main": "index.js",
   "directories": {
