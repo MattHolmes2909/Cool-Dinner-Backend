@@ -1,5 +1,4 @@
 const getDb = require('../services/db');
-const bcrypt = require('bcryptjs');
 
 exports.create = async (req, res, next) => {
   const db = await getDb();
@@ -22,11 +21,9 @@ exports.create = async (req, res, next) => {
         .sendStatus(500);
     }
 
-    const hashPass = await bcrypt.hash(password, 12);
-
     const [rows] = await db.execute(
       'INSERT INTO users(username, password, schoolClass, userType) VALUES(?, ?, ?, ?)',
-      [username, hashPass, schoolClass, userType]
+      [username, password, schoolClass, userType]
     );
 
     if (rows.affectedRows !== 1) {

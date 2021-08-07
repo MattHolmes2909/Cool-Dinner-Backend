@@ -1,5 +1,4 @@
 const getDb = require('../services/db');
-const bcrypt = require('bcryptjs');
 
 exports.login = async (req, res) => {
   const db = await getDb();
@@ -14,9 +13,7 @@ exports.login = async (req, res) => {
       res.send('Invalid username.').sendStatus(500);
     }
 
-    const checkPass = await bcrypt.compare(password, row[0].password);
-
-    if (checkPass === false) {
+    if (password !== row[0].password) {
       res.send('Password is incorrect.').sendStatus(500);
     } else {
       res.send('Login successful.').sendStatus(201);
