@@ -7,9 +7,13 @@ const canteenRouter = require('./routes/canteen');
 
 const app = express(express.json());
 
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
 
-app.options('*', cors());
+app.use(cors(corsOptions));
 
 app.use('/child', childRouter);
 
