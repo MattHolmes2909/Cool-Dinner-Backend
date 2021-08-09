@@ -41,10 +41,11 @@ exports.login = async (req, res) => {
       // const token = jwt.sign({ id }, 'jwtSecret', {
       //   expiresIn: 3600,
       // });
-      // req.session.user = res; //jwtSecret would normally be replaced with dotenv var.
+      req.session.user = res; //jwtSecret would normally be replaced with dotenv var.
       res.json({
         auth: true,
         message: 'Logged in.',
+        res: res,
       });
     }
   } catch (err) {
