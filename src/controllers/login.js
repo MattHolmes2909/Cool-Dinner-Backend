@@ -29,22 +29,25 @@ exports.login = async (req, res) => {
     ]);
 
     if (row.length === 0) {
-      res.json({ auth: false, message: 'Invalid username.' }).sendStatus(500);
+      res.json({ auth: false, message: 'Invalid username.' });
     }
 
     const checkPass = await bcrypt.compare(password, row[0].password);
 
     if (checkPass === false) {
-      res.json({ auth: false, message: 'Wrong password.' }).sendStatus(500);
+      res.json({ auth: false, message: 'Wrong password.' });
     } else {
       const id = row[0].id;
       const token = jwt.sign({ id }, 'jwtSecret', {
         expiresIn: 3600,
       });
       req.session.user = res; //jwtSecret would normally be replaced with dotenv var.
-      res
-        .json({ auth: true, message: 'Logged in successfully.' })
-        .sendStatus(201);
+      res.json({
+        auth: true,
+        token: token,
+        result: res,
+        message: 'Logged in.',
+      });
     }
   } catch (err) {
     res.sendStatus(500).json(err);
