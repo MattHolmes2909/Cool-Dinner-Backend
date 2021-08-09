@@ -29,13 +29,13 @@ exports.login = async (req, res) => {
     ]);
 
     if (row.length === 0) {
-      res.json({auth: false, message: "Invalid username."}.sendStatus(500);
+      res.json({ auth: false, message: 'Invalid username.' }).sendStatus(500);
     }
 
     const checkPass = await bcrypt.compare(password, row[0].password);
 
     if (checkPass === false) {
-      res.json({auth: false, message: "Wrong password."}.sendStatus(500);
+      res.json({ auth: false, message: 'Wrong password.' }).sendStatus(500);
     } else {
       const id = row[0].id;
       const token = jwt.sign({ id }, 'jwtSecret', {
@@ -46,7 +46,7 @@ exports.login = async (req, res) => {
     }
   } catch (err) {
     res.sendStatus(500).json(err);
-    res.json({auth: false, message: "Server issues."})
+    res.json({ auth: false, message: 'Server issues.' });
     console.log(err);
   }
   db.close();
