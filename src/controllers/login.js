@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
         expiresIn: 3600,
       });
       req.session.user = res; //jwtSecret would normally be replaced with dotenv var.
-      res.json({ auth: true, token: token, result: res }).sendStatus(201);
+      res.json({ auth: true, token: token }).sendStatus(201);
     }
   } catch (err) {
     res.sendStatus(500).json(err);
