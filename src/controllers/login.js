@@ -54,3 +54,16 @@ exports.login = async (req, res) => {
   }
   db.close();
 };
+
+exports.isUserAuth = async (req, res) => {
+  const db = await getDb();
+
+  try {
+    res.send('You are authenticated!');
+  } catch (err) {
+    res.sendStatus(500).json(err);
+    res.json({ auth: false, message: 'Server issues.' });
+    console.log(err);
+  }
+  db.close();
+};
