@@ -37,15 +37,14 @@ exports.login = async (req, res) => {
     if (checkPass === false) {
       res.json({ auth: false, message: 'Wrong password.' });
     } else {
-      // const id = row[0].id;
-      // const token = jwt.sign({ id }, 'jwtSecret', {
-      //   expiresIn: 3600,
-      // });
-      req.session.user = res; //jwtSecret would normally be replaced with dotenv var.
+      const id = row[0].id;
+      const token = jwt.sign({ id }, 'jwtSecret', {
+        expiresIn: 3600,
+      }); //jwtSecret would normally be replaced with dotenv var.
       res.json({
         auth: true,
         message: 'Logged in.',
-        res: res,
+        token: token,
       });
     }
   } catch (err) {
