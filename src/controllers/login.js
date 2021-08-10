@@ -28,6 +28,9 @@ exports.login = async (req, res) => {
         auth: true,
         message: 'Logged in.',
         token: token,
+        username: row[0].username,
+        schoolClass: row[0].schoolClass,
+        userType: row[0].userType,
       });
     }
   } catch (err) {
