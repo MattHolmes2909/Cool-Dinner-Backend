@@ -2,23 +2,6 @@ const getDb = require('../services/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// const verifyJWT = (req, res, next) => {
-//   const token = req.headers['x-access-token'];
-
-//   if (!token) {
-//     res.send('No token provided.');
-//   } else {
-//     jwt.verify(token, 'jwtSecret', (err, decoded) => {
-//       if (err) {
-//         res.json({ auth: false, message: 'Failed to authenticate.' });
-//       } else {
-//         req.userId = decoded.id;
-//         next();
-//       }
-//     });
-//   }
-// };
-
 exports.login = async (req, res) => {
   const db = await getDb();
   const { username, password } = req.body;
