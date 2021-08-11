@@ -24,16 +24,14 @@ exports.login = async (req, res) => {
       const token = jwt.sign({ id }, 'jwtSecret', {
         expiresIn: 3600,
       }); //jwtSecret would normally be replaced with dotenv var.
-      res
-        .json({
-          auth: true,
-          message: 'Logged in.',
-          token: token,
-          username: row[0].username,
-          schoolClass: row[0].schoolClass,
-          userType: row[0].userType,
-        })
-        .redirect('/');
+      res.json({
+        auth: true,
+        message: 'Logged in.',
+        token: token,
+        username: row[0].username,
+        schoolClass: row[0].schoolClass,
+        userType: row[0].userType,
+      });
     }
   } catch (err) {
     res.sendStatus(500).json(err);
