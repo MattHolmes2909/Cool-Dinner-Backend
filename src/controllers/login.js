@@ -33,7 +33,7 @@ exports.login = async (req, res) => {
           schoolClass: row[0].schoolClass,
           userType: row[0].userType,
         })
-        .redirect('back');
+        .redirect('/');
     }
   } catch (err) {
     res.sendStatus(500).json(err);
