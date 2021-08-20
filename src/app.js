@@ -8,15 +8,7 @@ const loginRouter = require('./routes/login');
 
 const app = express();
 
-app.use(
-  cors({
-    allowedHeaders: '*', // you can change the headers
-    exposedHeaders: '*', // you can change the headers
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
-  })
-);
+app.use(cors());
 
 app.use(express.json());
 
