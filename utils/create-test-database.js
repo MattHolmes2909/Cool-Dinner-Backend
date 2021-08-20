@@ -39,6 +39,7 @@ const setUpDatabase = async () => {
             classNumberFour INT
             )`);
     await db.query(`CREATE TABLE IF NOT EXISTS users (
+      id INT PRIMARY KEY auto_increment,
             username VARCHAR(25),
             password VARCHAR(64),
             schoolClass VARCHAR(25),
