@@ -5,6 +5,7 @@ const canteenRouter = require('./routes/canteen');
 const usersRouter = require('./routes/users');
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
+const menuRouter = require('./routes/menu');
 
 const app = express();
 
@@ -21,5 +22,7 @@ app.use('/users', usersRouter);
 app.use('/register', registerRouter);
 
 app.use('/login', loginRouter);
+
+app.use('/menu', menuRouter);
 
 module.exports = app;

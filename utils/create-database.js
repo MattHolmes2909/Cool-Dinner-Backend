@@ -54,6 +54,12 @@ const setUpDatabase = async () => {
     //         schoolClass VARCHAR(25),
     //         userType VARCHAR(25),
     //         )`);
+    await db.query(`CREATE TABLE IF NOT EXISTS menu (
+      foodName VARCHAR(25) PRIMARY KEY,
+      value VARCHAR(25),
+      foodOptionNum INT,
+      allergens VARCHAR(25)
+      )`);
     db.close();
   } catch (err) {
     console.log(
