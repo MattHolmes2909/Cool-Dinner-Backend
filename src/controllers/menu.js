@@ -13,6 +13,21 @@ exports.getAllFoods = async (_, res) => {
   db.close();
 };
 
+exports.getCurrentFoods = async (_, res) => {
+  const db = await getDb();
+
+  try {
+    const [menu] = await db.query(
+      'SELECT * FROM menu  WHERE foodOptionNum IS NOT null'
+    );
+
+    res.status(200).json(menu);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+  db.close();
+};
+
 exports.createFood = async (req, res) => {
   const db = await getDb();
   const { foodName, value, foodOptionNum, allergens } = req.body;
