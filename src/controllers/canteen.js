@@ -286,10 +286,12 @@ exports.countCurrentFoods = async (_, res) => {
     total1MH: 0,
     total2AW: 0,
     total2NM: 0,
+    value: '',
+    dietary: '',
   };
 
   const [optionOneName] = await db.query(
-    'SELECT foodName, value FROM menu WHERE foodOptionNum = ?',
+    'SELECT foodName, value, dietary FROM menu WHERE foodOptionNum = ?',
     [1]
   );
 
@@ -327,8 +329,10 @@ exports.countCurrentFoods = async (_, res) => {
   optionOne.total1MH = totalOptionOne1MH.total;
   optionOne.total2AW = totalOptionOne2AW.total;
   optionOne.total2NM = totalOptionOne2NM.total;
+  optionOne.value = optionOneName[0].value;
+  optionOne.dietary = optionOneName[0].dietary;
 
-  // pasta
+  // Option Two
 
   let optionTwo = {
     name: '',
@@ -337,10 +341,12 @@ exports.countCurrentFoods = async (_, res) => {
     total1MH: 0,
     total2AW: 0,
     total2NM: 0,
+    value: '',
+    dietary: '',
   };
 
   const [optionTwoName] = await db.query(
-    'SELECT foodName, value FROM menu WHERE foodOptionNum = ?',
+    'SELECT foodName, value, dietary FROM menu WHERE foodOptionNum = ?',
     [2]
   );
 
@@ -378,8 +384,10 @@ exports.countCurrentFoods = async (_, res) => {
   optionTwo.total1MH = totalOptionTwo1MH.total;
   optionTwo.total2AW = totalOptionTwo2AW.total;
   optionTwo.total2NM = totalOptionTwo2NM.total;
+  optionTwo.value = optionTwoName[0].value;
+  optionTwo.dietary = optionTwoName[0].dietary;
 
-  // fish
+  // Option Three
 
   let optionThree = {
     name: '',
@@ -388,10 +396,12 @@ exports.countCurrentFoods = async (_, res) => {
     total1MH: 0,
     total2AW: 0,
     total2NM: 0,
+    value: '',
+    dietary: '',
   };
 
   const [optionThreeName] = await db.query(
-    'SELECT foodName, value FROM menu WHERE foodOptionNum = ?',
+    'SELECT foodName, value, dietary FROM menu WHERE foodOptionNum = ?',
     [3]
   );
 
@@ -428,8 +438,10 @@ exports.countCurrentFoods = async (_, res) => {
   optionThree.total1MH = totalOptionThree1MH.total;
   optionThree.total2AW = totalOptionThree2AW.total;
   optionThree.total2NM = totalOptionThree2NM.total;
+  optionThree.value = optionThreeName[0].value;
+  optionThree.dietary = optionThreeName[0].dietary;
 
-  // quorn
+  // Option Four
 
   let optionFour = {
     name: '',
@@ -438,10 +450,12 @@ exports.countCurrentFoods = async (_, res) => {
     total1MH: 0,
     total2AW: 0,
     total2NM: 0,
+    value: '',
+    dietary: '',
   };
 
   const [optionFourName] = await db.query(
-    'SELECT foodName, value FROM menu WHERE foodOptionNum = ?',
+    'SELECT foodName, value, dietary FROM menu WHERE foodOptionNum = ?',
     [4]
   );
 
@@ -479,6 +493,8 @@ exports.countCurrentFoods = async (_, res) => {
   optionFour.total1MH = totalOptionFour1MH.total;
   optionFour.total2AW = totalOptionFour2AW.total;
   optionFour.total2NM = totalOptionFour2NM.total;
+  optionFour.value = optionFourName[0].value;
+  optionFour.dietary = optionFourName[0].dietary;
 
   // none
 
