@@ -50,7 +50,8 @@ const setUpDatabase = async () => {
       foodName VARCHAR(25),
         value VARCHAR(25),
         foodOptionNum INT,
-        allergens VARCHAR(25)
+        allergens VARCHAR(25),
+        dietary VARCHAR(25)
         )`);
     db.close();
   } catch (err) {

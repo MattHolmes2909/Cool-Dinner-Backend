@@ -30,12 +30,12 @@ exports.getCurrentFoods = async (_, res) => {
 
 exports.createFood = async (req, res) => {
   const db = await getDb();
-  const { foodName, value, foodOptionNum, allergens } = req.body;
+  const { foodName, value, foodOptionNum, allergens, dietary } = req.body;
 
   try {
     await db.query(
-      'INSERT INTO menu (foodName, value, foodOptionNum, allergens) VALUES (?, ?, ?, ?)',
-      [foodName, value, foodOptionNum, allergens]
+      'INSERT INTO menu (foodName, value, foodOptionNum, allergens, dietary) VALUES (?, ?, ?, ?)',
+      [foodName, value, foodOptionNum, allergens, dietary]
     );
     res.sendStatus(201);
   } catch (err) {
