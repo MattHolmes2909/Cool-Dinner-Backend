@@ -5,6 +5,8 @@ const router = express.Router();
 
 router.get('/', canteenController.countAllFoods);
 
+router.get('/current', canteenController.countCurrentFoods);
+
 router.get('/:foodOption', canteenController.countByFood);
 
 router.get('/:foodOption/:schoolClass', canteenController.countByFoodAndClass);

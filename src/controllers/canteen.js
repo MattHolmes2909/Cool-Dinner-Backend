@@ -276,6 +276,309 @@ exports.countByFood = async (req, res) => {
   db.close();
 };
 
+exports.countCurrentFoods = async (_, res) => {
+  const db = await getDb();
+
+  let optionOne = {
+    name: '',
+    total: 0,
+    total1DS: 0,
+    total1MH: 0,
+    total2AW: 0,
+    total2NM: 0,
+  };
+
+  const [optionOneName] = await db.query(
+    'SELECT foodName, value FROM menu WHERE foodOptionNum = ?',
+    [1]
+  );
+
+  const [
+    [[totalOptionOne]],
+    [[totalOptionOne1DS]],
+    [[totalOptionOne1MH]],
+    [[totalOptionOne2AW]],
+    [[totalOptionOne2NM]],
+  ] = [
+    await db.query('SELECT COUNT(*) as total FROM child WHERE foodOption = ?', [
+      optionOneName[0].value,
+    ]),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionOneName[0].value, '1DS']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionOneName[0].value, '1MH']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionOneName[0].value, '2AW']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionOneName[0].value, '2NM']
+    ),
+  ];
+
+  optionOne.name = optionOneName[0].foodName;
+  optionOne.total = totalOptionOne.total;
+  optionOne.total1DS = totalOptionOne1DS.total;
+  optionOne.total1MH = totalOptionOne1MH.total;
+  optionOne.total2AW = totalOptionOne2AW.total;
+  optionOne.total2NM = totalOptionOne2NM.total;
+
+  // pasta
+
+  let optionTwo = {
+    name: '',
+    total: 0,
+    total1DS: 0,
+    total1MH: 0,
+    total2AW: 0,
+    total2NM: 0,
+  };
+
+  const [optionTwoName] = await db.query(
+    'SELECT foodName, value FROM menu WHERE foodOptionNum = ?',
+    [2]
+  );
+
+  const [
+    [[totalOptionTwo]],
+    [[totalOptionTwo1DS]],
+    [[totalOptionTwo1MH]],
+    [[totalOptionTwo2AW]],
+    [[totalOptionTwo2NM]],
+  ] = [
+    await db.query('SELECT COUNT(*) as total FROM child WHERE foodOption = ?', [
+      optionTwoName[0].value,
+    ]),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionTwoName[0].value, '1DS']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionTwoName[0].value, '1MH']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionTwoName[0].value, '2AW']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionTwoName[0].value, '2NM']
+    ),
+  ];
+
+  optionTwo.name = optionTwoName[0].foodName;
+  optionTwo.total = totalOptionTwo.total;
+  optionTwo.total1DS = totalOptionTwo1DS.total;
+  optionTwo.total1MH = totalOptionTwo1MH.total;
+  optionTwo.total2AW = totalOptionTwo2AW.total;
+  optionTwo.total2NM = totalOptionTwo2NM.total;
+
+  // fish
+
+  let optionThree = {
+    name: '',
+    total: 0,
+    total1DS: 0,
+    total1MH: 0,
+    total2AW: 0,
+    total2NM: 0,
+  };
+
+  const [optionThreeName] = await db.query(
+    'SELECT foodName, value FROM menu WHERE foodOptionNum = ?',
+    [3]
+  );
+
+  const [
+    [[totalOptionThree]],
+    [[totalOptionThree1DS]],
+    [[totalOptionThree1MH]],
+    [[totalOptionThree2AW]],
+    [[totalOptionThree2NM]],
+  ] = [
+    await db.query('SELECT COUNT(*) as total FROM child WHERE foodOption = ?', [
+      optionThreeName[0].value,
+    ]),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionThreeName[0].value, '1DS']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionThreeName[0].value, '1MH']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionThreeName[0].value, '2AW']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionThreeName[0].value, '2NM']
+    ),
+  ];
+  optionThree.name = optionThreeName[0].foodName;
+  optionThree.total = totalOptionThree.total;
+  optionThree.total1DS = totalOptionThree1DS.total;
+  optionThree.total1MH = totalOptionThree1MH.total;
+  optionThree.total2AW = totalOptionThree2AW.total;
+  optionThree.total2NM = totalOptionThree2NM.total;
+
+  // quorn
+
+  let optionFour = {
+    name: '',
+    total: 0,
+    total1DS: 0,
+    total1MH: 0,
+    total2AW: 0,
+    total2NM: 0,
+  };
+
+  const [optionFourName] = await db.query(
+    'SELECT foodName, value FROM menu WHERE foodOptionNum = ?',
+    [4]
+  );
+
+  const [
+    [[totalOptionFour]],
+    [[totalOptionFour1DS]],
+    [[totalOptionFour1MH]],
+    [[totalOptionFour2AW]],
+    [[totalOptionFour2NM]],
+  ] = [
+    await db.query('SELECT COUNT(*) as total FROM child WHERE foodOption = ?', [
+      optionFourName[0].value,
+    ]),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionFourName[0].value, '1DS']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionFourName[0].value, '1MH']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionFourName[0].value, '2AW']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [optionFourName[0].value, '2NM']
+    ),
+  ];
+
+  optionFour.name = optionFourName[0].foodName;
+  optionFour.total = totalOptionFour.total;
+  optionFour.total1DS = totalOptionFour1DS.total;
+  optionFour.total1MH = totalOptionFour1MH.total;
+  optionFour.total2AW = totalOptionFour2AW.total;
+  optionFour.total2NM = totalOptionFour2NM.total;
+
+  // none
+
+  let none = {
+    total: 0,
+    total1DS: 0,
+    total1MH: 0,
+    total2AW: 0,
+    total2NM: 0,
+  };
+
+  const [
+    [[totalNone]],
+    [[totalNone1DS]],
+    [[totalNone1MH]],
+    [[totalNone2AW]],
+    [[totalNone2NM]],
+  ] = [
+    await db.query('SELECT COUNT(*) as total FROM child WHERE foodOption = ?', [
+      'none',
+    ]),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      ['none', '1DS']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      ['none', '1MH']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      ['none', '2AW']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      ['none', '2NM']
+    ),
+  ];
+
+  none.total = totalNone.total;
+  none.total1DS = totalNone1DS.total;
+  none.total1MH = totalNone1MH.total;
+  none.total2AW = totalNone2AW.total;
+  none.total2NM = totalNone2NM.total;
+
+  res.status(200).json({ optionOne, optionTwo, optionThree, optionFour, none });
+
+  db.close();
+};
+
+exports.countByFood = async (req, res) => {
+  const db = await getDb();
+  const { foodOption } = req.params;
+
+  let food = {
+    name: foodOption,
+    total: 0,
+    total1DS: 0,
+    total1MH: 0,
+    total2AW: 0,
+    total2NM: 0,
+  };
+
+  const [[[total]], [[total1DS]], [[total1MH]], [[total2AW]], [[total2NM]]] = [
+    await db.query('SELECT COUNT(*) as total FROM child WHERE foodOption = ?', [
+      foodOption,
+    ]),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [foodOption, '1DS']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [foodOption, '1MH']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [foodOption, '2AW']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [foodOption, '2NM']
+    ),
+  ];
+
+  food.total = total.total;
+  food.total1DS = total1DS.total;
+  food.total1MH = total1MH.total;
+  food.total2AW = total2AW.total;
+  food.total2NM = total2NM.total;
+
+  if (!foodOption) {
+    res.sendStatus(404);
+  } else {
+    res.status(200).json(food);
+  }
+
+  db.close();
+};
+
 exports.countByFoodAndClass = async (req, res) => {
   const db = await getDb();
   const { foodOption, schoolClass } = req.params;
