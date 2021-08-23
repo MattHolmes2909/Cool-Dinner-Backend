@@ -61,6 +61,41 @@ exports.createFood = async (req, res) => {
   db.close();
 };
 
+exports.editOptionNumbers = async (req, res) => {
+  const db = await getDb();
+  const { id, foodOptionNum } = req.body;
+
+  if (foodOptionNum !== 0) {
+    try {
+      await db.query(
+        'UPDATE menu SET foodOptionNum = ? WHERE foodOptionNum=?',
+        [0, foodOptionNum]
+      );
+      await db.query('UPDATE menu SET foodOptionNum = ? WHERE id=?', [
+        foodOptionNum,
+        id,
+      ]);
+      res.sendStatus(201);
+    } catch (err) {
+      res.sendStatus(500).json(err);
+      console.log(err);
+    }
+    db.close();
+  } else {
+    try {
+      await db.query('UPDATE menu SET foodOptionNum = ? WHERE id=?', [
+        foodOptionNum,
+        id,
+      ]);
+      res.sendStatus(201);
+    } catch (err) {
+      res.sendStatus(500).json(err);
+      console.log(err);
+    }
+    db.close();
+  }
+};
+
 exports.deleteFood = async (req, res) => {
   const db = await getDb();
   const { foodId } = req.params;
