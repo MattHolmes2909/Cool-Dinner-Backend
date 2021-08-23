@@ -16,15 +16,31 @@ exports.getAllFoods = async (_, res) => {
 exports.getCurrentFoods = async (_, res) => {
   const db = await getDb();
 
-  try {
-    const [menu] = await db.query(
-      'SELECT * FROM menu  WHERE foodOptionNum IS NOT null'
-    );
+  let currentMenu = {
+    optionOne: '',
+    optionTwo: '',
+    optionThree: '',
+    optionFour: '',
+  };
 
-    res.status(200).json(menu);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  [[currentMenu.optionOne]] = await db.query(
+    'SELECT * FROM menu WHERE foodOptionNum = ?',
+    [1]
+  );
+  [[currentMenu.optionTwo]] = await db.query(
+    'SELECT * FROM menu WHERE foodOptionNum = ?',
+    [2]
+  );
+  [[currentMenu.optionThree]] = await db.query(
+    'SELECT * FROM menu WHERE foodOptionNum = ?',
+    [3]
+  );
+  [[currentMenu.optionFour]] = await db.query(
+    'SELECT * FROM menu WHERE foodOptionNum = ?',
+    [4]
+  );
+  res.status(200).json(currentMenu);
+
   db.close();
 };
 
@@ -34,7 +50,7 @@ exports.createFood = async (req, res) => {
 
   try {
     await db.query(
-      'INSERT INTO menu (foodName, value, foodOptionNum, allergens, dietary) VALUES (?, ?, ?, ?)',
+      'INSERT INTO menu (foodName, value, foodOptionNum, allergens, dietary) VALUES (?, ?, ?, ?, ?)',
       [foodName, value, foodOptionNum, allergens, dietary]
     );
     res.sendStatus(201);

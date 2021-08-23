@@ -11,16 +11,16 @@ describe('read menu', () => {
     db = await getDb();
     await Promise.all([
       db.query(
-        'INSERT INTO menu (foodName, value, foodOptionNum, allergens) VALUES(?, ?, ?, ?)',
-        ['Fish and Chips', 'fish', '1', 'fish']
+        'INSERT INTO menu (foodName, value, foodOptionNum, allergens, dietary) VALUES(?, ?, ?, ?, ?)',
+        ['Fish and Chips', 'fish', '1', 'fish', 'fish']
       ),
       db.query(
-        'INSERT INTO menu (foodName, value, foodOptionNum, allergens) VALUES(?, ?, ?, ?)',
-        ['Pizza', 'pizza', '2', 'none']
+        'INSERT INTO menu (foodName, value, foodOptionNum, allergens, dietary) VALUES(?, ?, ?, ?, ?)',
+        ['Pizza', 'pizza', '2', 'none', 'meat']
       ),
       db.query(
-        'INSERT INTO menu (foodName, value, foodOptionNum, allergens) VALUES(?, ?, ?, ?)',
-        ['Quorn Curry', 'quorn', '3', 'nuts']
+        'INSERT INTO menu (foodName, value, foodOptionNum, allergens, dietary) VALUES(?, ?, ?, ?, ?)',
+        ['Quorn Curry', 'quorn', '3', 'nuts', 'veg']
       ),
     ]);
 

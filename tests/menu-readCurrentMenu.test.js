@@ -11,16 +11,16 @@ describe('read menu', () => {
     db = await getDb();
     await Promise.all([
       db.query(
-        'INSERT INTO menu (foodName, value, foodOptionNum, allergens) VALUES(?, ?, ?, ?)',
-        ['Fish and Chips', 'fish', '1', 'fish']
+        'INSERT INTO menu (foodName, value, foodOptionNum, allergens, dietary) VALUES(?, ?, ?, ?, ?)',
+        ['Fish and Chips', 'fish', '1', 'fish', 'fish']
       ),
       db.query(
-        'INSERT INTO menu (foodName, value, foodOptionNum, allergens) VALUES(?, ?, ?, ?)',
-        ['Pizza', 'pizza', '2', 'none']
+        'INSERT INTO menu (foodName, value, foodOptionNum, allergens, dietary) VALUES(?, ?, ?, ?, ?)',
+        ['Pizza', 'pizza', '2', 'none', 'meat']
       ),
       db.query(
-        'INSERT INTO menu (foodName, value, foodOptionNum, allergens) VALUES(?, ?, ?, ?)',
-        ['Quorn Curry', 'quorn', null, 'nuts']
+        'INSERT INTO menu (foodName, value, foodOptionNum, allergens, dietary) VALUES(?, ?, ?, ?, ?)',
+        ['Quorn Curry', 'quorn', null, 'nuts', 'veg']
       ),
     ]);
 
@@ -34,17 +34,12 @@ describe('read menu', () => {
 
   describe('/menu', () => {
     describe('GET', () => {
-      it('returns all menu records in the database', async () => {
+      it('returns current menu records in the database', async () => {
         const res = await request(app).get('/menu/current').send();
 
         expect(res.status).to.equal(200);
-        expect(res.body.length).to.equal(2);
-
-        res.body.forEach((menuRecord) => {
-          const expected = menu.find((a) => a.id === menuRecord.id);
-
-          expect(menuRecord).to.deep.equal(expected);
-        });
+        expect(res.body.optionOne.foodName).to.equal('Fish and Chips');
+        expect(res.body.optionTwo.foodName).to.equal('Pizza');
       });
     });
   });
