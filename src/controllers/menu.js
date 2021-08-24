@@ -67,9 +67,13 @@ exports.editOptionNumbers = async (req, res) => {
 
   if (foodOptionNum !== 0) {
     try {
+      const [[currentRowFood]] = await db.query(
+        'SELECT foodOptionNum FROM menu WHERE id = ?',
+        [id]
+      );
       await db.query(
         'UPDATE menu SET foodOptionNum = ? WHERE foodOptionNum=?',
-        [0, foodOptionNum]
+        [currentRowFood.foodOptionNum, foodOptionNum]
       );
       await db.query('UPDATE menu SET foodOptionNum = ? WHERE id=?', [
         foodOptionNum,
