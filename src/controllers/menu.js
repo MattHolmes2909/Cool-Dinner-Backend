@@ -4,7 +4,7 @@ exports.getAllFoods = async (_, res) => {
   const db = await getDb();
 
   try {
-    const [menu] = await db.query('SELECT * FROM menu');
+    const [menu] = await db.query('SELECT * FROM menu ORDER BY foodName');
 
     res.status(200).json(menu);
   } catch (err) {
