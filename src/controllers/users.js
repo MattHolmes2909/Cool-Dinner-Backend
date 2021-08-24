@@ -4,7 +4,7 @@ exports.read = async (_, res) => {
   const db = await getDb();
 
   try {
-    const [users] = await db.query('SELECT * FROM users');
+    const [users] = await db.query('SELECT * FROM users ORDER BY username');
 
     res.status(200).json(users);
   } catch (err) {

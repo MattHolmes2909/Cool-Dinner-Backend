@@ -21,7 +21,9 @@ exports.read = async (_, res) => {
   const db = await getDb();
 
   try {
-    const [children] = await db.query('SELECT * FROM child');
+    const [children] = await db.query(
+      'SELECT * FROM child ORDER BY schoolClass, childName'
+    );
 
     res.status(200).json(children);
   } catch (err) {
@@ -53,7 +55,7 @@ exports.readByClass = async (req, res) => {
 
   try {
     const [children] = await db.query(
-      'SELECT * FROM child WHERE schoolClass=?',
+      'SELECT * FROM child WHERE schoolClass=? ORDER BY childName',
       [schoolClass]
     );
 
