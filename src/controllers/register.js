@@ -39,3 +39,47 @@ exports.create = async (req, res, next) => {
   }
   db.close();
 };
+
+exports.create = async (req, res, next) => {
+  const db = await getDb();
+
+  const { username, password, schoolClass, userType } = req.body;
+  try {
+    const [row] = await db.execute('SELECT * FROM users WHERE username=?', [
+      username,
+    ]);
+
+    const [rowPending] = await db.execute(
+      'SELECT * FROM pending WHERE username=?',
+      [username]
+    );
+
+    if (row.length >= 1 || rowPending.length >= 1) {
+      res.send('This username already in use.').sendStatus(500);
+    }
+
+    if (password.length < 8) {
+      res
+        .send(
+          'This password is too short. It must be at least 8 characters long.'
+        )
+        .sendStatus(500);
+    }
+
+    const hashPass = await bcrypt.hash(password, 12);
+
+    const [rows] = await db.execute(
+      'INSERT INTO pending(username, password, schoolClass, userType) VALUES(?, ?, ?, ?)',
+      [username, hashPass, schoolClass, userType]
+    );
+
+    if (rows.affectedRows !== 1) {
+      res.send('Your registration has failed.').sendStatus(500);
+    }
+
+    res.send('You have successfully registered.').sendStatus(201);
+  } catch (error) {
+    next(error);
+  }
+  db.close();
+};

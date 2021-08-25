@@ -45,6 +45,13 @@ const setUpDatabase = async () => {
             schoolClass VARCHAR(25),
             userType VARCHAR(25)
       )`);
+    await db.query(`CREATE TABLE IF NOT EXISTS pending (
+        id INT PRIMARY KEY auto_increment,
+            username VARCHAR(25),
+            password VARCHAR(64),
+            schoolClass VARCHAR(25),
+            userType VARCHAR(25)
+        )`);
     await db.query(`CREATE TABLE IF NOT EXISTS menu (
       id INT PRIMARY KEY auto_increment,
       foodName VARCHAR(25),

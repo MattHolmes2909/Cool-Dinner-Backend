@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.post('/', registerController.create);
 
+router.post('/pending', registerController.create);
+
 module.exports = router;
