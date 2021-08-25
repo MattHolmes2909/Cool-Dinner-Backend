@@ -72,7 +72,7 @@ exports.updateMany = async (req, res) => {
 
   try {
     for (let i = 0; i < data.newOrders.length; i++) {
-      await db.query('UPDATE child SET ? WHERE id = ?', [
+      await db.query('UPDATE child SET foodOption = ? WHERE id = ?', [
         data.newOrders[i].foodOption,
         data.newOrders[i].id,
       ]);
@@ -80,7 +80,7 @@ exports.updateMany = async (req, res) => {
   } catch (error) {
     res.sendStatus(500).json(error);
   } finally {
-    res.status(200).json({ success: true, message: 'Child orders patched!' });
+    res.status(200).send('Success!');
   }
 
   db.close();
