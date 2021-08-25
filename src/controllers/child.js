@@ -66,6 +66,26 @@ exports.readByClass = async (req, res) => {
   db.close();
 };
 
+exports.updateMany = async (req, res) => {
+  const db = await getDb();
+  const data = req.body;
+
+  try {
+    for (let i = 0; i < data.newOrders.length; i++) {
+      await db.query('UPDATE child SET ? WHERE id = ?', [
+        data.newOrders[i].foodOption,
+        data.newOrders[i].id,
+      ]);
+    }
+  } catch (error) {
+    res.sendStatus(500).json(error);
+  } finally {
+    res.status(200).json({ success: true, message: 'Child orders patched!' });
+  }
+
+  db.close();
+};
+
 exports.update = async (req, res) => {
   const db = await getDb();
   const { childId } = req.params;

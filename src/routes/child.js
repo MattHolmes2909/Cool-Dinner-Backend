@@ -11,6 +11,8 @@ router.get('/:childId', childController.readById);
 
 router.get('/class/:schoolClass', childController.readByClass);
 
+router.patch('/updatemany', childController.updateMany);
+
 router.patch('/:childId', childController.update);
 
 router.delete('/:childId', childController.delete);
