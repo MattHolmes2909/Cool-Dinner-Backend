@@ -97,6 +97,24 @@ exports.createPending = async (req, res, next) => {
   db.close();
 };
 
+exports.addToUsers = async (req, res, next) => {
+  const db = await getDb();
+
+  const { id } = req.body;
+  try {
+    await db.execute('INSERT INTO users SELECT * FROM pending WHERE id=?', [
+      id,
+    ]);
+
+    await db.execute('DELETE FROM pending WHERE id=?', [id]);
+
+    res.send('User has been added.').sendStatus(201);
+  } catch (error) {
+    next(error);
+  }
+  db.close();
+};
+
 exports.deleteById = async (req, res) => {
   const db = await getDb();
   const { userId } = req.params;

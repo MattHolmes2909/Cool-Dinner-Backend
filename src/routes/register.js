@@ -9,6 +9,8 @@ router.get('/pending', registerController.showPending);
 
 router.post('/pending', registerController.createPending);
 
+router.post('/pending/:userId', registerController.addToUsers);
+
 router.delete('/pending/:userId', registerController.deleteById);
 
 module.exports = router;
