@@ -11,4 +11,6 @@ router.get('/:foodOption', canteenController.countByFood);
 
 router.get('/:foodOption/:schoolClass', canteenController.countByFoodAndClass);
 
+router.patch('/reset', canteenController.resetOrders);
+
 module.exports = router;

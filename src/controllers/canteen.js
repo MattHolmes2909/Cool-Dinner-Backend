@@ -612,3 +612,66 @@ exports.countByFoodAndClass = async (req, res) => {
 
   db.close();
 };
+
+exports.countByFood = async (req, res) => {
+  const db = await getDb();
+  const { foodOption } = req.params;
+
+  let food = {
+    name: foodOption,
+    total: 0,
+    total1DS: 0,
+    total1MH: 0,
+    total2AW: 0,
+    total2NM: 0,
+  };
+
+  const [[[total]], [[total1DS]], [[total1MH]], [[total2AW]], [[total2NM]]] = [
+    await db.query('SELECT COUNT(*) as total FROM child WHERE foodOption = ?', [
+      foodOption,
+    ]),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [foodOption, '1DS']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [foodOption, '1MH']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [foodOption, '2AW']
+    ),
+    await db.query(
+      'SELECT COUNT(*) as total FROM child WHERE foodOption = ? AND schoolClass = ?',
+      [foodOption, '2NM']
+    ),
+  ];
+
+  food.total = total.total;
+  food.total1DS = total1DS.total;
+  food.total1MH = total1MH.total;
+  food.total2AW = total2AW.total;
+  food.total2NM = total2NM.total;
+
+  if (!foodOption) {
+    res.sendStatus(404);
+  } else {
+    res.status(200).json(food);
+  }
+
+  db.close();
+};
+
+exports.resetOrders = async (_, res) => {
+  const db = await getDb();
+
+  try {
+    await db.query('UPDATE child SET foodOption = ?', ['none']);
+    res.status(200).json('Food orders reset!');
+  } catch (err) {
+    res.sendStatus(500).json(err);
+    console.log(err);
+  }
+  db.close();
+};
