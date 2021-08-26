@@ -100,7 +100,7 @@ exports.createPending = async (req, res, next) => {
 exports.addToUsers = async (req, res, next) => {
   const db = await getDb();
 
-  const { userId } = req.parameters;
+  const { userId } = req.params;
   try {
     await db.execute('INSERT INTO users SELECT * FROM pending WHERE id=?', [
       userId,
