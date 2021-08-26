@@ -5,6 +5,10 @@ const router = express.Router();
 
 router.post('/', registerController.create);
 
-router.post('/pending', registerController.create);
+router.get('/pending', registerController.showPending);
+
+router.post('/pending', registerController.createPending);
+
+router.delete('/pending/:userId', registerController.deleteById);
 
 module.exports = router;

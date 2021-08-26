@@ -40,7 +40,20 @@ exports.create = async (req, res, next) => {
   db.close();
 };
 
-exports.create = async (req, res, next) => {
+exports.showPending = async (_, res) => {
+  const db = await getDb();
+
+  try {
+    const [users] = await db.query('SELECT * FROM pending ORDER BY username');
+
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+  db.close();
+};
+
+exports.createPending = async (req, res, next) => {
   const db = await getDb();
 
   const { username, password, schoolClass, userType } = req.body;
@@ -81,5 +94,27 @@ exports.create = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+  db.close();
+};
+
+exports.deleteById = async (req, res) => {
+  const db = await getDb();
+  const { userId } = req.params;
+
+  try {
+    const [{ affectedRows }] = await db.query(
+      'DELETE FROM pending WHERE id = ?',
+      [userId]
+    );
+
+    if (!affectedRows) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json(affectedRows);
+    }
+  } catch (err) {
+    res.sendStatus(500);
+  }
+
   db.close();
 };
