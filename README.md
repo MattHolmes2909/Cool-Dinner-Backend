@@ -2,7 +2,7 @@
 
 ## By [Matt Holmes](https://github.com/MattHolmes2909) and [Dean Spooner](https://github.com/DeanSpooner)
 
-<img width="100%" src="./src/images/cd-logo.png">
+<img width="100%" src="https://raw.githubusercontent.com/MattHolmes2909/Cool-Dinners-Frontend/main/src/images/cd-logo.png">
 
 #### This is a React web app that allows school staff to create and edit food orders for their students. Features include:
 
@@ -34,24 +34,6 @@
 
 ---
 
-## Previews:
-
-### Login:
-
-<img src="./src/images/loginpreview.png">
-
-### Canteen:
-
-<img src="./src/images/canteenpreview.png">
-
-### Teachers:
-
-<img src="./src/images/teacherpreview.png">
-
-### Admin:
-
-## <img src="./src/images/adminpreview.png">
-
 ## Testing Methods:
 
 - Jest;
@@ -80,7 +62,7 @@
 ---
 
 <div align="center">
-<img src="./src/images/cd-logo-short.png" width="150px">
+<img src="https://raw.githubusercontent.com/MattHolmes2909/Cool-Dinners-Frontend/main/src/images/cd-logo-short.png" width="150px">
 
 # By [Matt Holmes](https://github.com/MattHolmes2909) and [Dean Spooner](https://github.com/DeanSpooner), 2021
 
